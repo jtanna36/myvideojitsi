@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "610881228360",
+    "project_id": "jitsi-meet-a6522",
+    "storage_bucket": "jitsi-meet-a6522.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610881228360:android:fc4ae158ae2d223bc3127d",
+        "android_client_info": {
+          "package_name": "com.example.myvideo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610881228360-o9vclai19ic9aqnb46hlpq83nmt05tvu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8peiDfgceOBav3d0cvLydM5S3002ndSs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610881228360-o9vclai19ic9aqnb46hlpq83nmt05tvu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
