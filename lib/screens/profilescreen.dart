@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_gradient_colors/flutter_gradient_colors.dart';
@@ -13,6 +14,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   String username = '';
   bool dataisthere = false;
+  TextEditingController usernamecontroller = new TextEditingController();
 
   @override
   void initState() {
@@ -78,16 +80,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 SizedBox(
                   height: 30,
                 ),
-                Container(
-                  width: MediaQuery.of(context).size.width/2,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(colors: GradientColors.cherry)
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Edit Profile",
-                      style: mystyle(17, Colors.white),
+                InkWell(
+                  onTap: () {
+                    openEditProfileDialog();
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width/2,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(colors: GradientColors.cherry)
+                    ),
+                    child: Center(
+                      child: Text(
+                        "Edit Profile",
+                        style: mystyle(17, Colors.white),
+                      ),
                     ),
                   ),
                 ),
@@ -118,5 +125,66 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       )
     );
+  }
+
+
+  openEditProfileDialog() async {
+      return showDialog(
+          context: context,
+          builder: (context){
+            return Dialog(
+              child: Container(
+                height: 200,
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
+                    ),
+                    Container(
+                      margin: EdgeInsets.only(left: 30, right: 30),
+                      child: TextField(
+                        controller: usernamecontroller,
+                        style: mystyle(18, Colors.black),
+                        decoration: InputDecoration(
+                          labelText: "Update Username",
+                          labelStyle: mystyle(16, Colors.grey)
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    InkWell(
+                      onTap: () => editProfile(),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width/2,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(colors: GradientColors.cherry)
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Update now",
+                            style: mystyle(17, Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ),
+            );
+          }
+      );
+  }
+
+  editProfile() async{
+    usercollection.doc(FirebaseAuth.instance.currentUser.uid).update({
+      'username' : usernamecontroller.text
+    });
+    setState(() {
+      username = usernamecontroller.text;
+    });
+    Navigator.pop(context);
   }
 }
