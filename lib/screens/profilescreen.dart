@@ -25,7 +25,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   getUserData() async {
     DocumentSnapshot userdoc = await usercollection.doc(FirebaseAuth.instance.currentUser.uid).get();
     setState(() {
-      username = userdoc.data()['username'];
+      // username = userdoc.data()['username'];
+      username = "demo";
       dataisthere = true;
     });
   }
